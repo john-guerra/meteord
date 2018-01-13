@@ -1,3 +1,22 @@
+
+Branch of https://github.com/abernix/meteord to support imagemagick-native on mup for meteor 1.6
+
+All credits to @abernix
+
+To generate the base image
+```
+cd build
+docker build . -t meteord1.6_imagemagick
+```
+
+If you want to use the pregenerated images:
+
+For meteor 1.5 https://hub.docker.com/r/otud/meteord_imagemagick/
+For meteor 1.6 https://hub.docker.com/r/otud/meteord1.6_imagemagick/
+
+Original README: 
+
+
 [![Circle CI](https://circleci.com/gh/abernix/meteord/tree/master.svg?style=svg)](https://circleci.com/gh/abernix/meteord/tree/master)
 
 # MeteorD - Docker image for MUP
