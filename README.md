@@ -5,8 +5,8 @@ All credits to @abernix
 
 To generate the base image
 ```
-cd build
-docker build . -t meteord1.6_imagemagick
+cd base
+docker build . -t otud/meteord1.6_imagemagick
 ```
 
 If you want to use the pregenerated images:
