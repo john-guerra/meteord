@@ -2,7 +2,7 @@
 set -e
 set -x
 
-export NODE_VERSION=${NODE_VERSION:-8.9.3}
+export NODE_VERSION=${NODE_VERSION:-8.11.3}
 
 bash ./build_it.sh
 
@@ -19,3 +19,5 @@ bash ./test_meteor_app_with_devbuild.sh
 
 bash ./test_phantomjs.sh
 bash ./test_no_app.sh
+
+bash ./test_sigterm.sh
