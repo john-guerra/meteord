@@ -2,8 +2,8 @@
 set -e
 apt-get update -y
 apt-get install -y curl bzip2 build-essential g++ python git libmagick++-dev imagemagick
-echo "export PATH=/usr/lib/x86_64-linux-gnu/ImageMagick-6.8.9/bin-Q16:$PATH" >> /etc/profile
-ln -s /usr/lib/x86_64-linux-gnu/ImageMagick-6.8.9/bin-Q16/Magick++* /usr/bin
+echo "export PATH=/usr/lib/x86_64-linux-gnu/ImageMagick-6.9.10/bin-q16:$PATH" >> /etc/profile
+ln -s /usr/lib/x86_64-linux-gnu/ImageMagick-6.9.10/bin-q16/Magick++* /usr/bin
 mkdir -p /etc/ImageMagick-6
 echo '<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE policymap [
@@ -39,7 +39,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 
   The /repository file system is restricted to read only.  We use a glob
   expression to match all paths that start with /repository:
-  
+
     <policy domain="path" rights="read" pattern="/repository/*" />
 
   Any large image is cached to disk rather than memory:
@@ -66,7 +66,8 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
   <policy domain="coder" rights="none" pattern="EPHEMERAL" />
   <!-- <policy domain="coder" rights="none" pattern="URL" /> -->
   <!-- <policy domain="coder" rights="none" pattern="HTTPS" /> -->
-  <policy domain="coder" rights="none" pattern="MVG" />
+  <policy domain="coder" rights="read|write" pattern="MVG" />
+  <policy domain="coder" rights="read|write" pattern="{PS,PDF,XPS}" />
   <policy domain="coder" rights="none" pattern="MSL" />
   <policy domain="coder" rights="none" pattern="TEXT" />
   <policy domain="coder" rights="none" pattern="SHOW" />

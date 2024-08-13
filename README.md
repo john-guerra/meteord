@@ -1,21 +1,23 @@
 
-Branch of https://github.com/abernix/meteord to support imagemagick-native on mup for meteor 1.6
+This is a branch of https://github.com/abernix/meteord that includes imagemagick-native on mup for meteor 1.6+
+
+Uses imagemagick-6.9.10 with debian:buster
 
 All credits to @abernix
 
 To generate the base image
 ```
 cd base
-docker build . -t otud/meteord1.6_imagemagick
+docker build . -t otud/meteord1.7_imagemagick
 ```
 
 If you want to use the pregenerated images:
 
 For meteor 1.5 https://hub.docker.com/r/otud/meteord_imagemagick/
 For meteor 1.6 https://hub.docker.com/r/otud/meteord1.6_imagemagick/
+For meteor 1.7+ https://hub.docker.com/r/otud/meteord1.7_imagemagick/
 
-Original README: 
-
+Original README:
 
 [![Circle CI](https://circleci.com/gh/abernix/meteord/tree/master.svg?style=svg)](https://circleci.com/gh/abernix/meteord/tree/master)
 
@@ -66,7 +68,7 @@ There are two main ways you can use Docker with Meteor apps. They are:
 
 ### 1. Build a Docker image for your app
 
-With this method, your app will be converted into a Docker image. Then you can simply run that image.  
+With this method, your app will be converted into a Docker image. Then you can simply run that image.
 
 For that, you can use `abernix/meteord:onbuild` as your base image. Magically, that's only thing you have to do. Here's how to do it:
 

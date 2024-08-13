@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:buster
 MAINTAINER John Alexis Guerra Gomez
 
 ENV METEORD_DIR /opt/meteord
