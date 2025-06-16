@@ -1,15 +1,27 @@
-# Install PhantomJS
+#!/bin/bash
+#https://github.com/jshimko/meteor-launchpad/blob/master/scripts/install-phantom.sh
 set -e
-apt-get -y install libfreetype6 libfreetype6-dev fontconfig
-ARCH=`uname -m`
-PHANTOMJS_VERSION=1.9.8
-PHANTOMJS_TAR_FILE=phantomjs-${PHANTOMJS_VERSION}-linux-${ARCH}.tar.bz2
 
-cd /usr/local/share/
-curl -L -O https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-${PHANTOMJS_VERSION}-linux-${ARCH}.tar.bz2
-tar xjf $PHANTOMJS_TAR_FILE
-ln -s -f /usr/local/share/phantomjs-${PHANTOMJS_VERSION}-linux-${ARCH}/bin/phantomjs /usr/local/share/phantomjs
-ln -s -f /usr/local/share/phantomjs-${PHANTOMJS_VERSION}-linux-${ARCH}/bin/phantomjs /usr/local/bin/phantomjs
-ln -s -f /usr/local/share/phantomjs-${PHANTOMJS_VERSION}-linux-${ARCH}/bin/phantomjs /usr/bin/phantomjs
+if [ -f $APP_SOURCE_DIR/launchpad.conf ]; then
+  source <(grep INSTALL_PHANTOMJS $APP_SOURCE_DIR/launchpad.conf)
+  source <(grep PHANTOM_VERSION $APP_SOURCE_DIR/launchpad.conf)
+fi
 
-rm $PHANTOMJS_TAR_FILE
+if [ "$INSTALL_PHANTOMJS" = true ]; then
+  printf "\n[-] Installing Phantom.js...\n\n"
+
+  PHANTOM_JS="phantomjs-$PHANTOM_VERSION-linux-x86_64"
+
+  apt-get update
+  apt-get install -y wget chrpath libssl-dev libxft-dev
+
+  cd /tmp
+  wget https://github.com/Medium/phantomjs/releases/download/v$PHANTOM_VERSION/$PHANTOM_JS.tar.bz2
+  tar xvjf $PHANTOM_JS.tar.bz2
+  mv $PHANTOM_JS /usr/local/share
+  ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/share/phantomjs
+  ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin/phantomjs
+  ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/bin/phantomjs
+
+  apt-get -y purge wget
+fi

@@ -1,0 +1,7 @@
+node_modules/
+settings.json
+settings-development.json
+settings-production.json
+*.pyc
+.DS_store
+.deploy/mup.js

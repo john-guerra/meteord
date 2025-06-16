@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -e
-
 if [ -d /bundle ]; then
   cd /bundle
   tar xzf *.tar.gz

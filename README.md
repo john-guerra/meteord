@@ -1,5 +1,5 @@
 
-This is a branch of https://github.com/abernix/meteord that includes imagemagick-native on mup for meteor 1.6+
+This is a branch of https://github.com/abernix/meteord that includes imagemagick-native on mup for meteor 2.16
 
 Uses imagemagick-6.9.10 with debian:buster
 
@@ -8,7 +8,8 @@ All credits to @abernix
 To generate the base image
 ```
 cd base
-docker build . -t otud/meteord1.7_imagemagick
+docker build --platform linux/amd64 . -t otud/meteord2.16_imagemagick
+docker push otud/meteord2.16_imagemagick
 ```
 
 If you want to use the pregenerated images:
@@ -29,12 +30,12 @@ Please see the explanation of the [tag variations](#tag-variations) (e.g. `-binb
 
 ### Node 8 (Meteor 1.6, 1.7+)
 
-#### Node 8.11.3
+#### Node 14.21.3
 
-* `node-8-base`, `node-8.11.3-base`
-* `node-8-binbuild`, `node-8.11.3-binbuild`
-* `node-8-onbuild`, `node-8.11.3-onbuild`
-* `node-8-devbuild`, `node-8.11.3-devbuild`
+* `node-8-base`, `node-14.21.3-base`
+* `node-8-binbuild`, `node-14.21.3-binbuild`
+* `node-8-onbuild`, `node-14.21.3-onbuild`
+* `node-8-devbuild`, `node-14.21.3-devbuild`
 
 ### Node 4 (Meteor 1.4, 1.5)
 
