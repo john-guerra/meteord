@@ -22,7 +22,7 @@ docker run -d \
     --platform linux/amd64 \
     --name meteor-app \
     -e ROOT_URL=http://yourapp_dot_com \
-    -e MONGO_URL=mongodb://localhost:27017/test \
+    -e MONGO_URL=mongodb://host.docker.internal:27017/test \
     -p 8080:80 \
     meteor-app-image
 

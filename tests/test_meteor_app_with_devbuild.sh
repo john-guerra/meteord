@@ -13,18 +13,20 @@ function clean() {
 cd /tmp
 clean
 
-meteor create --release 1.7.0.2 hello
+meteor create --release 3.2 hello
 cd hello
-echo "FROM abernix/meteord:node-${NODE_VERSION}-devbuild" > Dockerfile
+echo "FROM otud/meteord3.x_imagemagick:devbuild" > Dockerfile
 
-docker build -t meteor-app-image ./
+docker build --platform linux/amd64 -t meteor-app-image ./
 docker run -d \
+    --platform linux/amd64 \
     --name meteor-app \
     -e ROOT_URL=http://yourapp_dot_com \
+    -e MONGO_URL=mongodb://host.docker.internal:27017/test \
     -p 8080:80 \
     meteor-app-image
 
-sleep 5
+sleep 50
 
 appContent=`curl http://localhost:8080`
 clean
