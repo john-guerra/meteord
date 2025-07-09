@@ -1,6 +1,9 @@
 set -e
 set -x
 
+# Add meteor to PATH
+export PATH=/root/.meteor:$PATH
+
 COPIED_APP_PATH=/copied-app
 BUNDLE_DIR=/tmp/bundle-dir
 
@@ -11,14 +14,31 @@ cp -R /app $COPIED_APP_PATH
 cd $COPIED_APP_PATH
 
 echo "=> Executing NPM install --production"
-meteor npm install --production
+meteor npm install --production --allow-superuser
 
 echo "=> Executing Meteor Build..."
 export
+
+# Detect architecture for build compatibility
+ARCH=$(uname -m)
+case $ARCH in
+    x86_64)
+        METEOR_ARCH="os.linux.x86_64"
+        ;;
+    aarch64)
+        METEOR_ARCH="os.linux.x86_64"  # Meteor still uses x86_64 for ARM64 builds
+        ;;
+    *)
+        echo "Unsupported architecture: $ARCH, defaulting to x86_64"
+        METEOR_ARCH="os.linux.x86_64"
+        ;;
+esac
+
 meteor build \
   --allow-superuser \
   --directory $BUNDLE_DIR \
-  --server=http://localhost:3000
+  --server=http://localhost:3000 \
+  --architecture=$METEOR_ARCH
 
 echo "=> Printing Meteor Node information..."
 echo "  => platform"
@@ -51,4 +71,5 @@ echo " => BUNDLE_DIR"
 rm -rf $BUNDLE_DIR
 echo " => .meteor"
 rm -rf ~/.meteor
-rm /usr/local/bin/meteor
+# meteor might be installed via npm, so use -f to ignore if not found
+# rm -f /usr/local/bin/meteor

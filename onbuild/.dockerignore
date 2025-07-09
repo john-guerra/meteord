@@ -1,0 +1,5 @@
+test-meteor/
+tests/
+*.md
+.git/
+.gitignore
